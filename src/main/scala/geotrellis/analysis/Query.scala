@@ -23,7 +23,8 @@ object Query
     Option[Seq[Double]], // upper-right point
     Option[String],      // "when" field in SimpleFeatureType
     Option[String],      // start time
-    Option[String]       // end time
+    Option[String],      // end time
+    Boolean              // count on tservers?
   ) => Int
 
 
@@ -57,13 +58,15 @@ object Query
           query(
             tableName, typeName,
             where, List(xmin, ymin), Some(List(xmax, ymax)),
-            when, fromTime, toTime
+            when, fromTime, toTime,
+            true
           )
         case _ =>
           query(
             tableName, typeName,
             where, List(xmin, ymin), None,
-            when, fromTime, toTime
+            when, fromTime, toTime,
+            true
           )
       }
 
